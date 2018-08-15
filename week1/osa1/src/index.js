@@ -12,6 +12,15 @@ const App = () => {
     const osa3 = 'Komponenttien tila'
     const tehtavia3 = 14
 
+    const Osa = (props) => {
+        return (
+            <div>
+                <p>{props.osa} {props.tehtavia}</p>
+            </div>
+        )
+    }
+
+
     const Otsikko = (props) => {
         return (
             <div>
@@ -23,9 +32,9 @@ const App = () => {
     const Sisalto = (props) => {
         return (
             <div>
-                <p>{props.osa1} {props.tehtavia1}</p>
-                <p>{props.osa2} {props.tehtavia2}</p>
-                <p>{props.osa3} {props.tehtavia3}</p>
+                <Osa osa={osa1} tehtavia={tehtavia1} />
+                <Osa osa={osa2} tehtavia={tehtavia2} />
+                <Osa osa={osa3} tehtavia={tehtavia3} />
             </div>
         )
     }
