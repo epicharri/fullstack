@@ -11,22 +11,54 @@ class App extends React.Component {
         }
     }
 
+    lisaaHyva = () => {
+        this.setState({
+            hyva: this.state.hyva + 1
+        })
+    }
+
+    lisaaNeutraali = () => {
+        this.setState({
+            neutraali: this.state.neutraali + 1
+        })
+    }
+
+    lisaaHuono = () => {
+        this.setState({
+            huono: this.state.huono + 1
+        })
+    }
+
+
     render() {
+        const Button = (props) => {
+            console.log(props)
+            const { handleClick, text } = props
+            return (
+              <button onClick={handleClick}>
+                {text}
+              </button>
+            )
+        }
+
         return (
             <div>
                 <div>
                     <h1>anna palautetta</h1>
                 </div>
                 <div>
-                    <button onClick={() => this.setState({ hyva: this.state.hyva + 1 })}>
-                        hyvä
-                    </button>
-                    <button onClick={() => this.setState({ neutraali: this.state.neutraali + 1 })}>
-                        neutraali
-                    </button>
-                    <button onClick={() => this.setState({ huono: this.state.huono + 1 })}>
-                        huono
-                    </button>
+                    <Button 
+                        handleClick={this.lisaaHyva}
+                        text="hyvä" >
+                    </Button>
+                    <Button
+                        handleClick={this.lisaaNeutraali}
+                        text="neutraali" >
+                    </Button>
+                    <Button
+                        handleClick={this.lisaaHuono}
+                        text="huono" >
+                    </Button>
                 </div>
             
                 <div>
