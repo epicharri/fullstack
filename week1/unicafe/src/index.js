@@ -83,15 +83,16 @@ class App extends React.Component {
         }
 
         const Statistics = () => {
-            console.log(this.annaHyva)         
             return (
-                <div>
-                    <Statistic text="hyvä" value={annaHyva()}></Statistic>
-                    <Statistic text="neutraali" value={annaNeutraali()} ></Statistic>
-                    <Statistic text="huono" value={annaHuono()} ></Statistic>
-                    <Statistic text="keskiarvo" value={annaKeskiarvo()} ></Statistic>
-                    <Statistic text="positiivisia" value={annaPositiivistenOsuus()} ></Statistic>
-                </div>
+                annaHyva() > 0 || annaNeutraali() > 0 || annaHuono() > 0 ?
+                    <div>
+                        <Statistic text="hyvä" value={annaHyva()}></Statistic>
+                        <Statistic text="neutraali" value={annaNeutraali()} ></Statistic>
+                        <Statistic text="huono" value={annaHuono()} ></Statistic>
+                        <Statistic text="keskiarvo" value={annaKeskiarvo()} ></Statistic>
+                        <Statistic text="positiivisia" value={annaPositiivistenOsuus()} ></Statistic>
+                    </div> :
+                    <div><p>ei yhtään palautetta annettu</p></div>
             )
             
         }
