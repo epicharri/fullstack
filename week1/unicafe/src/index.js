@@ -11,6 +11,22 @@ class App extends React.Component {
         }
     }
 
+    lisaa = (props) => {
+        console.log(props)
+        if (props === "hyvä") 
+            return (
+                this.lisaaHyva
+            )
+        else if (props === "neutraali")
+            return (
+                this.lisaaNeutraali
+            )
+        else if (props === "huono")
+            return ( 
+                this.lisaaHuono
+            )
+    }
+
     lisaaHyva = () => {
         this.setState({
             hyva: this.state.hyva + 1
@@ -33,7 +49,7 @@ class App extends React.Component {
         const Button = (props) => {
             const { handleClick, text } = props
             return (
-              <button onClick={handleClick}>
+              <button onClick={handleClick(text)}>
                 {text}
               </button>
             )
@@ -75,7 +91,6 @@ class App extends React.Component {
 
         const Statistic = (props) => {
             const { text, value } = props
-            console.log('Statistics text ja value: ', text, value)
             return (
                 <p>{text} {value}</p>
             )
@@ -104,15 +119,15 @@ class App extends React.Component {
                 </div>
                 <div>
                     <Button 
-                        handleClick={this.lisaaHyva}
+                        handleClick={this.lisaa}
                         text="hyvä" >
                     </Button>
                     <Button
-                        handleClick={this.lisaaNeutraali}
+                        handleClick={this.lisaa}
                         text="neutraali" >
                     </Button>
                     <Button
-                        handleClick={this.lisaaHuono}
+                        handleClick={this.lisaa}
                         text="huono" >
                     </Button>
                 </div>
