@@ -6,9 +6,13 @@ class App extends React.Component {
         super(props)
         this.state = {
             selected: 0,
-            pisteet: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+            pisteet: [0,0,0,0,0,0],
+            isVoted: false
         }
     }
+
+//pisteet: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+
 
     annaRandom = () => {
         return(
@@ -25,14 +29,33 @@ class App extends React.Component {
     }
 
     vote = () => {
-        const kopio = {...this.state.pisteet}
+        const kopio = [...this.state.pisteet]
         kopio[this.state.selected] += 1
+        this.setState({
+            pisteet: kopio,
+            isVoted: true
+        })
+    }
+
+    annaParhaanIndeksi = () => {
+        const kopio = [...this.state.pisteet]
         return(
-            this.setState({
-                pisteet: kopio
-            })
+            kopio.indexOf(Math.max(...this.state.pisteet))
         )
     }
+
+    annaParasTeksti = () => {
+        return(
+            this.props.anecdotes[this.annaParhaanIndeksi()]
+        )
+    }
+
+    annaParasMaara = () => {
+        return(
+            this.state.pisteet[this.annaParhaanIndeksi()]
+        )
+    }
+
 
     render() {
         const Button = (props) => {
@@ -40,15 +63,34 @@ class App extends React.Component {
                 <button onClick={props.handleClick}>{props.text}</button>
             )
         }
+        const MostVoted = () => {
+            if(this.state.isVoted) {
+                return(
+                    <div>
+                        <p>{this.annaParasTeksti()}</p>
+                        <p>{this.annaParasMaara()}</p>
+                    </div>
+                )
+            }
+            return(
+                <div>
+                    <p>Ei vielä äänestetty yhtään anekdoottia.</p>
+                </div>
+            )
+        }
         return (
             <div>
-            <div>
-                {this.props.anecdotes[this.state.selected]}
-            </div>
-            <div>
-                <Button text="vote" handleClick={this.vote} />
-                <Button text="next anecdote" handleClick={this.anna} />
-            </div>
+                <div>
+                    {this.props.anecdotes[this.state.selected]}
+                </div>
+                <div>
+                    <Button text="vote" handleClick={this.vote} />
+                    <Button text="next anecdote" handleClick={this.anna} />
+                </div>
+                <div>
+                    <h1>anecdote with most votes:</h1>
+                    <MostVoted />
+                </div>
             </div>
         )
     }
