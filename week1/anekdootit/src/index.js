@@ -5,7 +5,8 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selected: 0
+            selected: 0,
+            pisteet: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
         }
     }
 
@@ -23,6 +24,16 @@ class App extends React.Component {
         )
     }
 
+    vote = () => {
+        const kopio = {...this.state.pisteet}
+        kopio[this.state.selected] += 1
+        return(
+            this.setState({
+                pisteet: kopio
+            })
+        )
+    }
+
     render() {
         const Button = (props) => {
             return(
@@ -35,6 +46,7 @@ class App extends React.Component {
                 {this.props.anecdotes[this.state.selected]}
             </div>
             <div>
+                <Button text="vote" handleClick={this.vote} />
                 <Button text="next anecdote" handleClick={this.anna} />
             </div>
             </div>
