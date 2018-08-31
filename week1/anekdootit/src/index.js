@@ -68,7 +68,7 @@ class App extends React.Component {
                 return(
                     <div>
                         <p>{this.annaParasTeksti()}</p>
-                        <p>{this.annaParasMaara()}</p>
+                        <p>has {this.annaParasMaara()} votes</p>
                     </div>
                 )
             }
